@@ -21,7 +21,7 @@ export default function ApiKeysPage() {
 
   const loadApiKeys = async () => {
     try {
-      const response = await apiClient.get("/api-keys");
+      const response = await apiClient.get("/keys");
       setApiKeys(response.data);
     } catch (error) {
       console.error("Failed to load API keys:", error);
@@ -35,7 +35,7 @@ export default function ApiKeysPage() {
     setCreating(true);
 
     try {
-      const response = await apiClient.post("/api-keys", { name: keyName });
+      const response = await apiClient.post("/keys", { name: keyName });
       setCreatedKey(response.data.key);
       setShowCreateModal(false);
       setShowKeyModal(true);
@@ -50,7 +50,7 @@ export default function ApiKeysPage() {
 
   const handleRevokeKey = async (keyId: string) => {
     try {
-      await apiClient.delete(`/api-keys/${keyId}`);
+      await apiClient.delete(`/keys/${keyId}`);
       loadApiKeys();
     } catch (error) {
       console.error("Failed to revoke API key:", error);
