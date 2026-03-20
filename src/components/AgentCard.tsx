@@ -2,7 +2,7 @@
 
 import { Agent } from "@/types";
 import { formatTimeAgo, statusColor } from "@/lib/utils";
-import { ExternalLink, Pause2, Play } from "lucide-react";
+import { ExternalLink, Pause, Play } from "lucide-react";
 import Link from "next/link";
 
 interface AgentCardProps {
@@ -55,7 +55,7 @@ export default function AgentCard({ agent, onPause, onResume, loading = false }:
             disabled={loading}
             className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded bg-yellow-500/10 text-yellow-400 hover:bg-yellow-500/20 disabled:opacity-50 transition-colors text-sm font-medium"
           >
-            <Pause2 className="w-4 h-4" />
+            <Pause className="w-4 h-4" />
             Pause
           </button>
         ) : agent.status === "paused" ? (
