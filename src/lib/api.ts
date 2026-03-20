@@ -1,13 +1,14 @@
 import axios, { AxiosError, AxiosInstance } from "axios";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+const API_V1_URL = `${API_BASE_URL}/api/v1`;
 
 let api: AxiosInstance | null = null;
 
 function getApiInstance(): AxiosInstance {
   if (!api) {
     api = axios.create({
-      baseURL: API_BASE_URL,
+      baseURL: API_V1_URL,
       timeout: 10000,
     });
 
@@ -36,7 +37,7 @@ function getApiInstance(): AxiosInstance {
               throw new Error("No refresh token available");
             }
 
-            const response = await axios.post(`${API_BASE_URL}/auth/refresh`, {
+            const response = await axios.post(`${API_V1_URL}/auth/refresh`, {
               refreshToken,
             });
 
