@@ -69,7 +69,7 @@ export default function AgentDetailPage({ params }: AgentDetailPageProps) {
   };
 
   if (loading) {
-    return <div className="p-8 text-dark-text/60">Loading agent...</div>;
+    return <div className="p-8 font-mono text-xs text-accent-blue">$ loading agent<span className="animate-[cursor-blink_1s_step-end_infinite]">▊</span></div>;
   }
 
   if (!agent) {

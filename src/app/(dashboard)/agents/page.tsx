@@ -69,7 +69,7 @@ export default function AgentsPage() {
 
   if (loading) {
     return (
-      <div className="p-8 font-mono text-xs text-nx-muted">
+      <div className="p-8 font-mono text-xs text-accent-blue">
         $ loading agents<span className="animate-[cursor-blink_1s_step-end_infinite] text-accent-blue">▊</span>
       </div>
     );
