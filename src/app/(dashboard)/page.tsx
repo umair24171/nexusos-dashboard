@@ -30,17 +30,16 @@ export default function DashboardPage() {
           }
         }
 
-        const [agentsRes, alertsRes, statsRes] = await Promise.all([
+        const [agentsRes, alertsRes] = await Promise.all([
           apiClient.get("/agents"),
           apiClient.get("/alerts"),
-          apiClient.get("/stats"),
         ]);
 
         setStats({
-          totalAgents: agentsRes.data.length,
-          activeAlerts: alertsRes.data.filter((a: Alert) => !a.resolved).length,
-          logsToday: statsRes.data.logsToday || 0,
-          tokensUsed: statsRes.data.tokensUsed || 0,
+          totalAgents: agentsRes.data?.length ?? 0,
+          activeAlerts: (alertsRes.data as Alert[])?.filter((a: Alert) => !a.resolved).length ?? 0,
+          logsToday: 0,
+          tokensUsed: 0,
         });
       } catch (error) {
         console.error("Failed to load dashboard:", error);
@@ -130,7 +129,7 @@ export default function DashboardPage() {
         <div>
           <UsageChart
             used={stats.tokensUsed}
-            limit={user?.planLimits.tokensPerDay || 10000}
+            limit={user?.planLimits?.logsPerMonth || 10000}
             label="Daily Tokens"
           />
         </div>
