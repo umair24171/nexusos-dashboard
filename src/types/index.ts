@@ -8,6 +8,7 @@ export interface User {
     logsPerMonth: number;
     apiKeys: number;
     dataRetention: number;
+    tokensPerDay: number;
   };
   orgName?: string;
 }
