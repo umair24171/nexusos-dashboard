@@ -24,7 +24,17 @@ function getApiInstance(): AxiosInstance {
     );
 
     api.interceptors.response.use(
-      (response) => response,
+      (response) => {
+        // Unwrap backend's { success, data, message } envelope
+        if (
+          response.data &&
+          typeof response.data === "object" &&
+          "success" in response.data
+        ) {
+          response.data = response.data.data;
+        }
+        return response;
+      },
       async (error: AxiosError) => {
         const originalRequest = error.config as any;
 
@@ -41,7 +51,7 @@ function getApiInstance(): AxiosInstance {
               refreshToken,
             });
 
-            const { accessToken } = response.data;
+            const { accessToken } = response.data.data;
             localStorage.setItem("accessToken", accessToken);
 
             originalRequest.headers.Authorization = `Bearer ${accessToken}`;

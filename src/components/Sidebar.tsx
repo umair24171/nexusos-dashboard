@@ -24,8 +24,12 @@ export default function Sidebar() {
 
   useEffect(() => {
     const userData = localStorage.getItem("user");
-    if (userData) {
-      setUser(JSON.parse(userData));
+    if (userData && userData !== "undefined" && userData !== "null") {
+      try {
+        setUser(JSON.parse(userData));
+      } catch {
+        localStorage.removeItem("user");
+      }
     }
     setLoading(false);
   }, []);

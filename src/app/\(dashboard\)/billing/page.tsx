@@ -79,12 +79,8 @@ export default function BillingPage() {
 
   useEffect(() => {
     const userData = localStorage.getItem("user");
-    if (userData && userData !== "undefined" && userData !== "null") {
-      try {
-        setUser(JSON.parse(userData));
-      } catch {
-        localStorage.removeItem("user");
-      }
+    if (userData) {
+      setUser(JSON.parse(userData));
     }
     setLoading(false);
   }, []);
@@ -174,9 +170,9 @@ export default function BillingPage() {
           {plans.map((plan) => {
             const isCurrentPlan = plan.id === currentPlan;
             const isBetter =
-              (plan.id === "pro" && currentPlan === "starter") ||
-              (plan.id === "starter" && currentPlan === "free") ||
-              (plan.id === "pro" && currentPlan === "free");
+              plan.id === "pro" && currentPlan === "starter" ||
+              plan.id === "starter" && currentPlan === "free" ||
+              plan.id === "pro" && currentPlan === "free";
 
             return (
               <div
