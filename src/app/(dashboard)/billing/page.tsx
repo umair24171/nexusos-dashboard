@@ -170,9 +170,9 @@ export default function BillingPage() {
           {plans.map((plan) => {
             const isCurrentPlan = plan.id === currentPlan;
             const isBetter =
-              plan.id === "pro" && currentPlan === "starter" ||
-              plan.id === "starter" && currentPlan === "free" ||
-              plan.id === "pro" && currentPlan === "free";
+              (plan.id === "pro" && currentPlan === "starter") ||
+              (plan.id === "starter" && currentPlan === "free") ||
+              (plan.id === "pro" && currentPlan === "free");
 
             return (
               <div
