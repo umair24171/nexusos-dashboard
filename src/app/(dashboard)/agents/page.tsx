@@ -47,7 +47,7 @@ export default function AgentsPage() {
     setFormLoading(true);
     try {
       const r = await apiClient.post("/agents", formData);
-      setCreatedAgent({ agentId: r.data.data?.agent?.agentId, agentSecret: r.data.data?.agentSecret });
+      setCreatedAgent({ agentId: r.data?.agent?.agentId, agentSecret: r.data?.agentSecret });
       setShowModal(false);
       setShowCreds(true);
       setFormData({ name: "", description: "", framework: "python", environment: "development" });
