@@ -99,10 +99,10 @@ export default function BillingPage() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
             {[
-              { label: "Agents",     value: user?.planLimits.agents?.toLocaleString() ?? "—"     },
-              { label: "Logs/Month", value: user?.planLimits.logsPerMonth?.toLocaleString() ?? "—" },
-              { label: "API Keys",   value: user?.planLimits.apiKeys?.toLocaleString() ?? "—"    },
-              { label: "Retention",  value: `${user?.planLimits.dataRetention ?? 0}d`            },
+              { label: "Agents",     value: user?.planLimits?.agents?.toLocaleString() ?? "—"     },
+              { label: "Logs/Month", value: user?.planLimits?.logsPerMonth?.toLocaleString() ?? "—" },
+              { label: "API Keys",   value: user?.planLimits?.apiKeys?.toLocaleString() ?? "—"    },
+              { label: "Retention",  value: `${user?.planLimits?.dataRetention ?? 0}d`            },
             ].map(({ label, value }) => (
               <div key={label} className="bg-dark-bg border border-dark-border p-3">
                 <p className="font-mono text-[9px] uppercase tracking-widest text-nx-muted mb-1">{label}</p>
