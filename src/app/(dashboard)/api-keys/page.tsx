@@ -21,7 +21,7 @@ export default function ApiKeysPage() {
   const loadApiKeys = async () => {
     try {
       const r = await apiClient.get("/keys");
-      setApiKeys(r.data);
+      setApiKeys(r.data.data ?? []);
     } catch (e) { console.error(e); }
     finally { setLoading(false); }
   };
@@ -31,7 +31,7 @@ export default function ApiKeysPage() {
     setCreating(true);
     try {
       const r = await apiClient.post("/keys", { name: keyName });
-      setCreatedKey(r.data.key);
+      setCreatedKey(r.data.data?.key);
       setCreate(false);
       setShowKey(true);
       setKeyName("");

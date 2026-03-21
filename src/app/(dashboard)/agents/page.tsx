@@ -27,7 +27,7 @@ export default function AgentsPage() {
   const loadAgents = async () => {
     try {
       const r = await apiClient.get("/agents");
-      setAgents(r.data);
+      setAgents(r.data.data ?? []);
     } catch (e) { console.error(e); }
     finally { setLoading(false); }
   };
@@ -47,7 +47,7 @@ export default function AgentsPage() {
     setFormLoading(true);
     try {
       const r = await apiClient.post("/agents", formData);
-      setCreatedAgent({ agentId: r.data.agentId, agentSecret: r.data.agentSecret });
+      setCreatedAgent({ agentId: r.data.data?.agentId, agentSecret: r.data.data?.agentSecret });
       setShowModal(false);
       setShowCreds(true);
       setFormData({ name: "", description: "", framework: "python", environment: "development" });

@@ -39,8 +39,8 @@ export default function DashboardPage() {
         ]);
 
         setStats({
-          totalAgents:  agentsRes.data?.length ?? 0,
-          activeAlerts: (alertsRes.data as Alert[])?.filter((a: Alert) => !a.resolved).length ?? 0,
+          totalAgents:  agentsRes.data?.data?.length ?? 0,
+          activeAlerts: (alertsRes.data?.data as Alert[])?.filter((a: Alert) => !a.resolved).length ?? 0,
           logsToday:    0,
           tokensUsed:   0,
         });
