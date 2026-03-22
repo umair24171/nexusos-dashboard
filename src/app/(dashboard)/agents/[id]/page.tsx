@@ -118,11 +118,11 @@ export default function AgentDetailPage({ params }: AgentDetailPageProps) {
         </div>
         <div className="bg-dark-card border border-dark-border rounded-lg p-4">
           <p className="text-dark-text/60 text-sm mb-1">Tokens Used</p>
-          <p className="text-2xl font-bold text-dark-text">{agent.stats.tokensUsed.toLocaleString()}</p>
+          <p className="text-2xl font-bold text-dark-text">{(agent.stats.totalTokensUsed ?? 0).toLocaleString()}</p>
         </div>
         <div className="bg-dark-card border border-dark-border rounded-lg p-4">
           <p className="text-dark-text/60 text-sm mb-1">Last Seen</p>
-          <p className="text-sm font-semibold text-dark-text">{formatTimeAgo(agent.stats.lastSeen)}</p>
+          <p className="text-sm font-semibold text-dark-text">{agent.stats?.lastSeenAt ? formatTimeAgo(agent.stats.lastSeenAt) : "never"}</p>
         </div>
       </div>
 
