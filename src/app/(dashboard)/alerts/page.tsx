@@ -27,13 +27,13 @@ export default function AlertsPage() {
   useEffect(() => { loadAlerts(); loadRules(); }, []);
 
   const loadAlerts = async () => {
-    try { const r = await apiClient.get("/alerts"); setAlerts(r.data.data ?? []); }
+    try { const r = await apiClient.get("/alerts"); setAlerts(r.data ?? []); }
     catch (e) { console.error(e); }
     finally { setLoading(false); }
   };
 
   const loadRules = async () => {
-    try { const r = await apiClient.get("/alerts/rules"); setAlertRules(r.data.data ? Object.entries(r.data.data).map(([type, v]: [string, any]) => ({ id: type, type, ...v })) : []); }
+    try { const r = await apiClient.get("/alerts/rules"); setAlertRules(r.data ? Object.entries(r.data).map(([type, v]: [string, any]) => ({ id: type, type, ...v })) : []); }
     catch (e) { console.error(e); }
   };
 
