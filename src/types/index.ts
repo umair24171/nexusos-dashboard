@@ -32,9 +32,9 @@ export interface AgentMetadata {
 
 export interface AgentStats {
   totalActions: number;
-  tokensUsed: number;
-  lastSeen: string;
-  createdAt: string;
+  totalTokensUsed: number;
+  lastSeenAt?: string | null;
+  firstSeenAt?: string | null;
 }
 
 export interface Agent {

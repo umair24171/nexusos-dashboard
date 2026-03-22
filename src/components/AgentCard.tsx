@@ -50,7 +50,7 @@ export default function AgentCard({ agent, onPause, onResume, loading = false }:
             </p>
           </div>
         </div>
-        <Link href={`/agents/${agent.id}`}>
+        <Link href={`/agents/${agent.agentId}`}>
           <button className="text-nx-muted hover:text-accent-blue transition-colors flex-shrink-0 ml-2">
             <ExternalLink className="w-3.5 h-3.5" />
           </button>
@@ -61,11 +61,11 @@ export default function AgentCard({ agent, onPause, onResume, loading = false }:
       <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 font-mono mb-4">
         <div>
           <p className="text-[9px] text-nx-muted uppercase tracking-widest mb-0.5">framework</p>
-          <p className="text-xs text-dark-text">{agent.metadata.framework}</p>
+          <p className="text-xs text-dark-text">{agent.metadata?.framework || "—"}</p>
         </div>
         <div>
           <p className="text-[9px] text-nx-muted uppercase tracking-widest mb-0.5">env</p>
-          <p className="text-xs text-dark-text capitalize">{agent.metadata.environment}</p>
+          <p className="text-xs text-dark-text capitalize">{agent.metadata?.environment || "—"}</p>
         </div>
         <div>
           <p className="text-[9px] text-nx-muted uppercase tracking-widest mb-0.5">status</p>
@@ -73,7 +73,7 @@ export default function AgentCard({ agent, onPause, onResume, loading = false }:
         </div>
         <div>
           <p className="text-[9px] text-nx-muted uppercase tracking-widest mb-0.5">last seen</p>
-          <p className="text-xs text-dark-text">{formatTimeAgo(agent.stats.lastSeen)}</p>
+          <p className="text-xs text-dark-text">{agent.stats?.lastSeenAt ? formatTimeAgo(agent.stats.lastSeenAt) : "never"}</p>
         </div>
       </div>
 

@@ -46,7 +46,11 @@ export default function AgentsPage() {
     e.preventDefault();
     setFormLoading(true);
     try {
-      const r = await apiClient.post("/agents", formData);
+      const r = await apiClient.post("/agents", {
+        name: formData.name,
+        description: formData.description,
+        metadata: { framework: formData.framework, environment: formData.environment },
+      });
       setCreatedAgent({ agentId: r.data?.agent?.agentId, agentSecret: r.data?.agentSecret });
       setShowModal(false);
       setShowCreds(true);
@@ -57,8 +61,11 @@ export default function AgentsPage() {
   };
 
   const handlePauseResume = async (agentId: string, newStatus: "paused" | "active") => {
-    try { await apiClient.patch(`/agents/${agentId}`, { status: newStatus }); loadAgents(); }
-    catch (e) { console.error(e); }
+    try {
+      const endpoint = newStatus === "paused" ? "pause" : "resume";
+      await apiClient.post(`/agents/${agentId}/${endpoint}`);
+      loadAgents();
+    } catch (e) { console.error(e); }
   };
 
   const copyText = (text: string, field: "id" | "secret") => {
@@ -132,10 +139,10 @@ export default function AgentsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredAgents.map(agent => (
             <AgentCard
-              key={agent.id}
+              key={agent.agentId}
               agent={agent}
-              onPause={() => handlePauseResume(agent.id, "paused")}
-              onResume={() => handlePauseResume(agent.id, "active")}
+              onPause={() => handlePauseResume(agent.agentId, "paused")}
+              onResume={() => handlePauseResume(agent.agentId, "active")}
             />
           ))}
         </div>
