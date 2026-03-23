@@ -57,7 +57,7 @@ export default function BillingPage() {
     }
     setUpgrading(true);
     try {
-      const r = await apiClient.post("/billing/checkout", { planId });
+      const r = await apiClient.post("/billing/checkout", { plan: planId });
       window.location.href = r.data?.checkoutUrl;
     } catch (e) { console.error(e); setUpgrading(false); }
   };

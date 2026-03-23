@@ -1,13 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
 import { apiClient } from "@/lib/api";
 
 export default function RegisterPage() {
-  const router = useRouter();
+  const router       = useRouter();
+  const searchParams = useSearchParams();
+  const planParam    = searchParams.get("plan");
   const [formData, setFormData] = useState({
     name: "", email: "", password: "", confirmPassword: "", orgName: "",
   });
@@ -36,7 +38,8 @@ export default function RegisterPage() {
       localStorage.setItem("accessToken",  accessToken);
       localStorage.setItem("refreshToken", refreshToken);
       localStorage.setItem("user",         JSON.stringify(user));
-      router.push("/");
+      // If user came from a paid plan CTA, send them straight to billing
+      router.push(planParam && planParam !== "free" ? "/billing" : "/");
     } catch (err: any) {
       setError(err.response?.data?.message || "Registration failed. Please try again.");
     } finally {
