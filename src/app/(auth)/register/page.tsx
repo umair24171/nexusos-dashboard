@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
 import { apiClient } from "@/lib/api";
 
-export default function RegisterPage() {
+function RegisterForm() {
   const router       = useRouter();
   const searchParams = useSearchParams();
   const planParam    = searchParams.get("plan");
@@ -121,5 +121,13 @@ export default function RegisterPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense>
+      <RegisterForm />
+    </Suspense>
   );
 }
